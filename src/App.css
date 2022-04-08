@@ -1,0 +1,39 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  text-align: center;
+}
+
+.form-name-surname,
+.form-email-phone{
+  display: flex;
+}
+
+.radio-gender-btn,
+.form-vaccinated,
+.form-birthdate{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-container{
+  color: red;
+  font-size: 0.8rem;
+  margin: 5px;
+}
+
+h4{
+  margin: 5px;
+}
+
