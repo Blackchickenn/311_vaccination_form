@@ -1,16 +1,23 @@
+//* Comments
+//* Used React for this application with MATERIAL UI package 
+//* For the forms used FORMIK package
+//* For the validation used YUP package
+
 import React from 'react'
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import Button from '@mui/material/Button'
-import { TextField } from '@mui/material'
+import { FormGroup, TextField } from '@mui/material'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
+
+
 export default function Signup() { 
 
-  const formik = useFormik({
+  const formik = useFormik({                                                                   //* variable for all necessary properties and values
       initialValues:{
         name: "",
         surname: "",
@@ -20,7 +27,7 @@ export default function Signup() {
         gender:"",
         vaccinated:""
       },
-      validationSchema: Yup.object({
+      validationSchema: Yup.object({                                                            //*validation on all property values + added a methods
         name:Yup.string()
           .max(12, "Should be 12 letters or less")
           .required("Required"),
@@ -36,25 +43,27 @@ export default function Signup() {
           .required("Required")
       }),
       onSubmit:(values) => {
-        console.log(values)
+        console.log(values)                                                                     //*showing all data in a console
+        alert("Thank you, your registration was succesfull!")                                   //*pop-up message about succesfull registration
       }
   })
 
   return (
-    
-    <form onSubmit={formik.handleSubmit}>
+                                                                                                //*showing through submit all fielded data in console*//
+    <form onSubmit={formik.handleSubmit}>                                                       
+      <h2>Vaccination Registration Form </h2>
       <div className='form-name-surname'> 
         <div className="input-container"> 
             <TextField 
-                id='name'
+                id='name' 
                 name='name'
                 type="text"
                 placeholder='Name'
-                onChange={formik.handleChange}
+                onChange={formik.handleChange}                                                  //*what value needs to handle a change
                 value={formik.values.name}
-                onBlur={formik.handleBlur}
-            />
-          {formik.touched.name && formik.errors.name ? <p>{formik.errors.name}</p> : null}
+                onBlur={formik.handleBlur}                                                      //*value which helps us showing an error only in case we touched that field
+            />                                                                                  
+          {formik.touched.name && formik.errors.name ? <p>{formik.errors.name}</p> : null}      
         </div>
         <div className="input-container">
             <TextField 
@@ -101,7 +110,7 @@ export default function Signup() {
         <RadioGroup
           row
           aria-labelledby="gender-radio-btn"
-          name="radio-buttons-group"
+          name="gender"
           onChange={formik.handleChange}
         >
           <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -125,8 +134,14 @@ export default function Signup() {
       </div>
       <div className='form-vaccinated'>
         <h4>Vaccinated:</h4> 
-        <FormControlLabel control={<Checkbox />} label="Yes" />
-        <FormControlLabel control={<Checkbox />} label="No" />
+        <FormGroup
+          row
+          name="vaccinated"
+          onChange={formik.handleChange}
+        >
+          <FormControlLabel  name="vaccinated" value="yes" control={<Checkbox />} label="Yes" />
+          <FormControlLabel  name="vaccinated" value="no" control={<Checkbox />} label="No" />
+        </FormGroup>
       </div>
         <Button variant='contained' type='submit'>Submit</Button>
     </form>
